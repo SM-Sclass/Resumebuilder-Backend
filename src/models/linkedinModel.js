@@ -43,4 +43,4 @@ const linkedinProfileSchema = new mongoose.Schema({
   otherInfo: { type: mongoose.Schema.Types.Mixed }
 });
 
-export const LinkedInProfile = mongoose.model('LinkedInProfile', linkedinProfileSchema);
+export const LinkedInProfile = mongoose.models.LinkedInProfile || mongoose.model('LinkedInProfile', linkedinProfileSchema);

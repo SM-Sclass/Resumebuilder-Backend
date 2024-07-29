@@ -12,4 +12,4 @@ const templateSchema = new mongoose.Schema({
   templateData: { type: templateDataSchema, required: true }
 });
 
-export const Template = mongoose.model('Template', templateSchema);
+export const Template = mongoose.models.Template || mongoose.model('Template', templateSchema);

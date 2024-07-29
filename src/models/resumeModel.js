@@ -24,4 +24,4 @@ const resumeSchema = new mongoose.Schema({
 });
 
 
-export const Resume = mongoose.module("Resume",resumeSchema);
+export const Resume = mongoose.models.Resume || mongoose.module("Resume",resumeSchema);

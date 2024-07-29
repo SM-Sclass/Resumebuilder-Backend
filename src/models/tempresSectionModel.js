@@ -17,5 +17,7 @@ const sectionSchema = new mongoose.Schema({
       right: { type: Number }
     }
   });
-export const format = mongoose.model("format",formattingSchema);
-export const section = mongoose.model("section",sectionSchema);
+export const format = mongoose.models.format || mongoose.model("format",formattingSchema);
+export const section = mongoose.models.section || mongoose.model("section",sectionSchema);
+
+
