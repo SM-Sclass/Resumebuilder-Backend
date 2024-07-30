@@ -4,6 +4,7 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: true,
+        unique: true,
     },
     email: {
         type: String,
@@ -14,6 +15,15 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    isVerfied: {
+        type: Boolean,
+        default: false,
+    },
+    forgotPasswordToken: String,
+    forgotPasswordTokenExpiry: Date,
+    verifyToken: String,
+    verifyTokenExpiry: Date,
+    
     linkedinId: {
         type: String,
         default: null,
