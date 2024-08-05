@@ -3,11 +3,12 @@ import cookieParser from "cookie-parser"
 import cors from 'cors'
 import dotenv from "dotenv"
 import userRoute from "./routes/userRoute.js"
-
+import connect from './dbconfig/dbConfig.js'
 dotenv.config({});
 const port = process.env.PORT || 3001;
 // console.log(process.env.PORT)
 const app = express()
+connect()
 app.use(express.json());
 app.use(cookieParser());
 
@@ -32,4 +33,4 @@ app.use("/api/user", userRoute)
 app.listen(port, ()=>{
     console.log(`Server is running on port ${port}`)
 })
-console.log("SUmit")
+console.log("Sumit")

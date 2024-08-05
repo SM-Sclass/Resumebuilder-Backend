@@ -2,6 +2,8 @@ import User from "../models/userModel.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
+
+
 export const signup = async (req, res) => {
     try {
         const { username, email, password } = req.body;
@@ -12,7 +14,7 @@ export const signup = async (req, res) => {
             });
         }
         const userName = await User.findOne({ username });
-        if (username) {
+        if (userName) {
             return res.status(400).json({ msg: "username already exists", success: false });
         }
         const user = await User.findOne({ email });
@@ -58,12 +60,11 @@ export const login = async (req, res) => {
                 success:false
             });
         }
-
         const tokenData = {
             id: user._id,
             username: user.username
         }
-        const token = await jwt.sign(tokenData , process.env.SECRET_KEY, {expireIn:'1d'})
+        const token = await jwt.sign(tokenData , "zidioDevelopmentinternship", {expiresIn:'1d'})
 
         return res.status(200).cookie("token", token, {maxAge: 1*24*60*60*1000, httpsOnly:true, sameSite:'strict'}).json(
             {msg: `Welcome back ${user.username}`,
@@ -94,10 +95,13 @@ export const updateProfile = async(req, res) => {
         if(!username){
             return res.status(400).json({msg: "Please enter a username", success: false})
         }
-        const user = await User.findOne({username})
-        if(user){
+        const finduser = await User.findOne({username})
+        if(finduser){
             return res.status(400).json({msg: "Username already exists enter another username", success: false})
         }
+        const userId = req.id;
+        let user = await User.findById(userId)
+        console.log(user)
         user.username = username;
         await user.save();
         user = {

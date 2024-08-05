@@ -1,9 +1,9 @@
 import mongoose from "mongoose"
 
-export async function connect(){
+export default async function connect(){
     try{
-        if(process.env.MONGO_URI)
-            mongoose.connect(process.env.MONGO_URI)
+        await mongoose.connect("mongodb+srv://Asus:$UM!T376@cluster0.vvhlsc0.mongodb.net/RSbuilder")
+        // console.log(process.env.MONGO_URI)
         const connection = mongoose.connection
         connection.on('connected', ()=>{
             console.log('MongoDB connected');
